@@ -1,0 +1,37 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+All articles and News:
+{% endblock title %}
+
+{% block content %}
+   <h1>Articles and News</h1>
+   <hr>
+   {% if post_list %}
+       <table>
+           <tr>
+               <td>Tittle</td>
+                <td></td>
+               <td>Date</td>
+               <td></td>
+               <td>Text</td>
+           </tr>
+           {% for post in post_list %}
+           <tr>
+               <td>{{ post.post_title|censorship }}</td>
+                <td></td>
+               <td>{{ post.post_date|date:'d M Y' }}</td>
+               <td></td>
+               <td>{{ post.post_text|truncatechars:20|censorship }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+   {% else %}
+       <h2>Nothing</h2>
+   {% endif %}
+{% endblock content %}
+
+
+
